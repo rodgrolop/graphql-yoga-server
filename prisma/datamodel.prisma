@@ -1,18 +1,28 @@
+enum Role {
+  ADMIN
+  ADMIN_TEST
+  CLIENT
+  USER
+}
+
+type User {
+  id: ID! @unique
+  role: Role! @default(value: "USER")
+  name: String
+  email: String! @unique
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  links: [Link!]!
+  votes: [Vote!]!
+}
+
 type Link {
   id: ID! @unique
   createdAt: DateTime!
   description: String!
   url: String!
   postedBy: User
-  votes: [Vote!]!
-}
-
-type User {
-  id: ID! @unique
-  name: String!
-  email: String! @unique
-  password: String!
-  links: [Link!]!
   votes: [Vote!]!
 }
 
