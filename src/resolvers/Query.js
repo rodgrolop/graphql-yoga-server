@@ -1,3 +1,5 @@
+import { me } from './auth'
+
 const feed = async (parent, args, context, info) => {
   const where = args.filter
     ? {
@@ -26,4 +28,4 @@ const feed = async (parent, args, context, info) => {
   }
 }
 
-export { feed }
+export { me, feed }

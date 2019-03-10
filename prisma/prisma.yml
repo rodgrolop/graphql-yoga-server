@@ -1,5 +1,4 @@
 # The HTTP endpoint for your Prisma API
-#endpoint: ''
 endpoint: https://eu1.prisma.sh/rodrigogrosslopez-5764bc/graphql-yoga-server/dev
 
 # Points to the file that contains your datamodel

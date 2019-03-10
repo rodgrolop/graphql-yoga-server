@@ -1,20 +1,6 @@
 import { GraphQLServer } from 'graphql-yoga'
 import { prisma } from './generated/prisma-client'
-import * as Query from './resolvers/Query'
-import * as Mutation from './resolvers/Mutation'
-import * as Subscription from './resolvers/Subscription'
-import * as User from './resolvers/User'
-import * as Link from './resolvers/Link'
-import * as Vote from './resolvers/Vote'
-
-const resolvers = {
-  Query,
-  Mutation,
-  Subscription,
-  User,
-  Link,
-  Vote
-}
+import resolvers from './resolvers'
 
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
