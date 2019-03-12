@@ -1,0 +1,57 @@
+type Query {
+  me: User
+  feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+}
+
+type Mutation {
+  post(url: String!, description: String!): Post!
+  signup(username: String!, email: String!, password: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  # like(postId: ID!): Like
+}
+
+# type Subscription {
+#   newLink: Link
+#   newVote: Vote
+# }
+
+type User {
+  id: ID!
+  role: String!
+  username: String!
+  posts: [Post!]!
+}
+
+type Post {
+  id: ID!
+  # createdAt: DateTime!
+  description: String!
+  url: String!
+  postedBy: User
+  # likes: [Like!]!
+}
+
+# type Like {
+#   id: ID!
+#   post: Post!
+#   user: User!
+# }
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Feed {
+  posts: [Post!]!
+  count: Int!
+}
+
+enum LinkOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}

@@ -10,7 +10,7 @@ const feed = async (parent, args, context, info) => {
       }
     : {}
 
-  const links = await context.prisma.links({
+  const posts = await context.prisma.posts({
     where,
     skip: args.skip,
     first: args.first,
@@ -23,7 +23,7 @@ const feed = async (parent, args, context, info) => {
     .aggregate()
     .count()
   return {
-    links,
+    posts,
     count
   }
 }

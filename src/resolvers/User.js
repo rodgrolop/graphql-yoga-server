@@ -1,4 +1,4 @@
-const links = (parent, args, context) =>
-  context.prisma.user({ id: parent.id }).links()
+const posts = (parent, args, context) =>
+  context.prisma.user({ id: parent.id }).posts()
 
-export { links }
+export { posts }

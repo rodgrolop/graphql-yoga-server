@@ -1,16 +1,15 @@
 import jwt from 'jsonwebtoken'
-
-const APP_SECRET = 'GraphQL-is-aw3some'
+import config from './../config'
 
 const getUserId = context => {
   const Authorization = context.request.get('Authorization')
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
-    const { userId } = jwt.verify(token, APP_SECRET)
+    const { userId } = jwt.verify(token, config.appSecret)
     return userId
   }
 
   throw new Error('Not authenticated')
 }
 
-export { APP_SECRET, getUserId }
+export { getUserId }
