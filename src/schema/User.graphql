@@ -1,0 +1,6 @@
+type User {
+  id: ID!
+  role: String!
+  username: String!
+  posts: [Post!]!
+}
