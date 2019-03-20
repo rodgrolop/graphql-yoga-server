@@ -1,7 +1,7 @@
 type Mutation {
   post(url: String!, description: String!): Post!
   signup(username: String!, email: String!, password: String!): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
+  login(login: String!, password: String!): AuthPayload!
   # like(postId: ID!): Like
 }
 

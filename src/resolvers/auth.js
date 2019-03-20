@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken'
 import { getUserId } from '../utils'
 import config from './../../config'
 
+import { WrongLoginError } from '../errors/UserMutationError'
+
 const me = async (parent, args, context, info) => {
   const userId = getUserId(context)
 
@@ -23,9 +25,13 @@ const signup = async (parent, args, context, info) => {
 }
 
 const login = async (parent, args, context, info) => {
-  const user = await context.prisma.user({ email: args.email })
+  let user = await context.prisma.user({ username: args.login })
   if (!user) {
-    throw new Error('No such user found')
+    let user = await context.prisma.user({ email: args.login })
+    if (!user) {
+      const error = { userError: 'userError' }
+      throw error
+    }
   }
 
   const valid = await bcrypt.compare(args.password, user.password)
@@ -34,7 +40,6 @@ const login = async (parent, args, context, info) => {
   }
 
   const token = jwt.sign({ userId: user.id }, config.appSecret)
-
   return {
     token,
     user

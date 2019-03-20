@@ -1,4 +1,4 @@
-import { GraphQLServer } from 'graphql-yoga'
+import { GraphQLServer, Options } from 'graphql-yoga'
 import { prisma } from './generated/prisma-client'
 import resolvers from './resolvers'
 
