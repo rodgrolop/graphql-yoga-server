@@ -1,4 +1,4 @@
-import { signup, login } from './auth'
+import { register, login } from './auth'
 import { getUserId } from '../utils'
 
 const post = (parent, args, context, info) => {
@@ -28,4 +28,4 @@ const post = (parent, args, context, info) => {
 //   })
 // }
 
-export { signup, login, post }
+export { register, login, post }

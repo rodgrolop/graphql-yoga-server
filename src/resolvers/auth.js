@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { getUserId } from '../utils'
 import config from './../../config'
 
-import { WrongLoginError } from '../errors/UserMutationError'
+// import { WrongLoginError } from '../errors/UserMutationError'
 
 const me = async (parent, args, context, info) => {
   const userId = getUserId(context)
@@ -11,7 +11,7 @@ const me = async (parent, args, context, info) => {
   return context.prisma.user({ id: userId }, info)
 }
 
-const signup = async (parent, args, context, info) => {
+const register = async (parent, args, context, info) => {
   const password = await bcrypt.hash(args.password, 10)
 
   const user = await context.prisma.createUser({ ...args, password })
@@ -46,4 +46,4 @@ const login = async (parent, args, context, info) => {
   }
 }
 
-export { me, signup, login }
+export { me, register, login }
