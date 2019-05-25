@@ -3,6 +3,6 @@ type Post {
   # createdAt: DateTime!
   description: String!
   url: String!
-  postedBy: User
+  user: User
   # likes: [Like!]!
 }

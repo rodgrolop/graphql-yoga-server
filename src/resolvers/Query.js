@@ -1,4 +1,29 @@
-import { me } from './auth'
+import { getUserId } from '../utils'
+
+const me = async (parent, args, context, info) => {
+  const userId = getUserId(context)
+
+  const user = await context.prisma.user({ id: userId }, info)
+
+  if (!user) {
+    throw new Error('User not Found')
+  }
+
+  return user
+}
+
+const myProfile = async (parent, args, context, info) => {
+  const userId = getUserId(context)
+
+  return context.prisma.user({ id: userId }, info).profile
+}
+
+const myPosts = async (parent, args, context, info) => {
+  const userId = getUserId(context)
+
+  const posts = await context.prisma.user({ id: userId }, info).posts
+  return posts
+}
 
 const feed = async (parent, args, context, info) => {
   const where = args.filter
@@ -17,7 +42,7 @@ const feed = async (parent, args, context, info) => {
     orderBy: args.orderBy
   })
   const count = await context.prisma
-    .linksConnection({
+    .postsConnection({
       where
     })
     .aggregate()
@@ -28,4 +53,4 @@ const feed = async (parent, args, context, info) => {
   }
 }
 
-export { me, feed }
+export { me, myProfile, myPosts, feed }

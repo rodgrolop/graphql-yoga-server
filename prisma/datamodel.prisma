@@ -5,8 +5,8 @@ enum Role {
 }
 
 type User {
-  id: ID! @unique
-  role: Role! @default(value: "USER")
+  id: ID! @id
+  role: Role! @default(value: USER)
   username: String! @unique
   email: String! @unique
   # emailvalidated: Boolean! @default(value: false)
@@ -16,8 +16,7 @@ type User {
   # resetPasswordExpires: Float
   # createdAt: DateTime!
   # updatedAt: DateTime!
-  profilePicture: String
-  # posts: [Post!]!
+  posts: [Post!]!
   # portfolios: [Portfolio!]!
   # followingUsers: [User!]!
   # followedByUsers: [User!]!
@@ -25,16 +24,31 @@ type User {
   # likes: [Like!]!
   # chats: [Chat!]!
   # notifications:[Notification!]!
+  profilePicture: String
+  profile: Profile @relation(link: INLINE)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type Profile {
+  id: ID! @id
+  user: User!
+  firstName: String
+  lastName: String
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
 
 type Post {
-  id: ID! @unique
+  id: ID! @id
   # createdAt: DateTime!
   description: String!
   url: String!
-  postedBy: User
+  user: User!
   # followedByUsers: [User!]!
   # likes: [Like!]!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
 
 # type Portfolio {

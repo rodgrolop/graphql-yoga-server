@@ -1,15 +1,23 @@
 import { register, login } from './auth'
 import { getUserId } from '../utils'
 
-const post = (parent, args, context, info) => {
+const profile = async (parent, args, context, info) => {
   const userId = getUserId(context)
-  return context.prisma.createLink({
-    url: args.url,
-    description: args.description,
-    postedBy: { connect: { id: userId } }
+  return context.prisma.createProfile({
+    firstName: args.firstName,
+    lastName: args.lastName,
+    user: { connect: { id: userId } }
   })
 }
 
+const post = (parent, args, context, info) => {
+  const userId = getUserId(context)
+  return context.prisma.createPost({
+    url: args.url,
+    description: args.description,
+    user: { connect: { id: userId } }
+  })
+}
 // const vote = async (parent, args, context, info) => {
 //   const userId = getUserId(context)
 
@@ -28,4 +36,4 @@ const post = (parent, args, context, info) => {
 //   })
 // }
 
-export { register, login, post }
+export { register, login, profile, post }

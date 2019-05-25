@@ -1,15 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { getUserId } from '../utils'
 import config from './../../config'
-
-// import { WrongLoginError } from '../errors/UserMutationError'
-
-const me = async (parent, args, context, info) => {
-  const userId = getUserId(context)
-
-  return context.prisma.user({ id: userId }, info)
-}
 
 const register = async (parent, args, context, info) => {
   const password = await bcrypt.hash(args.password, 10)
@@ -29,8 +20,7 @@ const login = async (parent, args, context, info) => {
   if (!user) {
     let user = await context.prisma.user({ email: args.login })
     if (!user) {
-      const error = { userError: 'userError' }
-      throw error
+      throw new Error('User not Found')
     }
   }
 
@@ -46,4 +36,4 @@ const login = async (parent, args, context, info) => {
   }
 }
 
-export { me, register, login }
+export { register, login }

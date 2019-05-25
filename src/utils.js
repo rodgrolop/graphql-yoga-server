@@ -8,6 +8,9 @@ const getUserId = context => {
     const { userId } = jwt.verify(token, config.appSecret)
     return userId
   }
+  if (typeof userId === 'undefined') {
+    throw new Error('User ID not found')
+  }
 
   throw new Error('Not authenticated')
 }

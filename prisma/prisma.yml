@@ -8,8 +8,5 @@ datamodel: datamodel.prisma
 generate:
   - generator: javascript-client
     output: ../src/generated/prisma-client
-
 # Expose updated methods if needed after deployment
-hooks:
-  post-deploy:
-    - prisma generate
+
