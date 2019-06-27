@@ -1,6 +1,6 @@
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import config from './../../config'
+import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
+import config from "./../../config"
 
 const register = async (parent, args, context, info) => {
   const password = await bcrypt.hash(args.password, 10)
@@ -20,13 +20,13 @@ const login = async (parent, args, context, info) => {
   if (!user) {
     let user = await context.prisma.user({ email: args.login })
     if (!user) {
-      throw new Error('User not Found')
+      throw new Error("User not Found")
     }
   }
 
   const valid = await bcrypt.compare(args.password, user.password)
   if (!valid) {
-    throw new Error('Invalid password')
+    throw new Error("Invalid password")
   }
 
   const token = jwt.sign({ userId: user.id }, config.appSecret)

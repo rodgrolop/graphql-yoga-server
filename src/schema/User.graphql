@@ -2,7 +2,6 @@ type User {
   id: ID!
   role: String!
   username: String!
-  profilePicture: String
   profile: Profile
   posts: [Post!]!
 }

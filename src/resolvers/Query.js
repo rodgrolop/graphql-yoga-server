@@ -1,4 +1,4 @@
-import { getUserId } from '../utils'
+import { getUserId } from "../utils"
 
 const me = async (parent, args, context, info) => {
   const userId = getUserId(context)
@@ -6,16 +6,10 @@ const me = async (parent, args, context, info) => {
   const user = await context.prisma.user({ id: userId }, info)
 
   if (!user) {
-    throw new Error('User not Found')
+    throw new Error("User not Found")
   }
 
   return user
-}
-
-const myProfile = async (parent, args, context, info) => {
-  const userId = getUserId(context)
-
-  return context.prisma.user({ id: userId }, info).profile
 }
 
 const myPosts = async (parent, args, context, info) => {
@@ -53,4 +47,4 @@ const feed = async (parent, args, context, info) => {
   }
 }
 
-export { me, myProfile, myPosts, feed }
+export { me, myPosts, feed }

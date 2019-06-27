@@ -3,4 +3,5 @@ type Profile {
   user: User!
   firstName: String
   lastName: String
+  profilePicture: String
 }

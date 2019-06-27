@@ -1,0 +1,9 @@
+type Profile {
+  id: ID! @id
+  user: User! @relation(link: INLINE name: "UserProfile")
+  firstName: String
+  lastName: String  
+  profilePicture: String
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
