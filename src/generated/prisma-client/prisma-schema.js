@@ -63,9 +63,11 @@ type PageInfo {
 
 type Post {
   id: ID!
-  description: String!
-  url: String!
   user: User!
+  slug: String!
+  title: String!
+  description: String!
+  html: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -78,9 +80,11 @@ type PostConnection {
 
 input PostCreateInput {
   id: ID
-  description: String!
-  url: String!
   user: UserCreateOneWithoutPostsInput!
+  slug: String!
+  title: String!
+  description: String!
+  html: String!
 }
 
 input PostCreateManyWithoutUserInput {
@@ -90,8 +94,10 @@ input PostCreateManyWithoutUserInput {
 
 input PostCreateWithoutUserInput {
   id: ID
+  slug: String!
+  title: String!
   description: String!
-  url: String!
+  html: String!
 }
 
 type PostEdge {
@@ -102,10 +108,14 @@ type PostEdge {
 enum PostOrderByInput {
   id_ASC
   id_DESC
+  slug_ASC
+  slug_DESC
+  title_ASC
+  title_DESC
   description_ASC
   description_DESC
-  url_ASC
-  url_DESC
+  html_ASC
+  html_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -114,8 +124,10 @@ enum PostOrderByInput {
 
 type PostPreviousValues {
   id: ID!
+  slug: String!
+  title: String!
   description: String!
-  url: String!
+  html: String!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -135,6 +147,34 @@ input PostScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -149,20 +189,20 @@ input PostScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
+  html: String
+  html_not: String
+  html_in: [String!]
+  html_not_in: [String!]
+  html_lt: String
+  html_lte: String
+  html_gt: String
+  html_gte: String
+  html_contains: String
+  html_not_contains: String
+  html_starts_with: String
+  html_not_starts_with: String
+  html_ends_with: String
+  html_not_ends_with: String
   updatedAt: DateTime
   updatedAt_not: DateTime
   updatedAt_in: [DateTime!]
@@ -203,19 +243,25 @@ input PostSubscriptionWhereInput {
 }
 
 input PostUpdateInput {
-  description: String
-  url: String
   user: UserUpdateOneRequiredWithoutPostsInput
+  slug: String
+  title: String
+  description: String
+  html: String
 }
 
 input PostUpdateManyDataInput {
+  slug: String
+  title: String
   description: String
-  url: String
+  html: String
 }
 
 input PostUpdateManyMutationInput {
+  slug: String
+  title: String
   description: String
-  url: String
+  html: String
 }
 
 input PostUpdateManyWithoutUserInput {
@@ -236,8 +282,10 @@ input PostUpdateManyWithWhereNestedInput {
 }
 
 input PostUpdateWithoutUserDataInput {
+  slug: String
+  title: String
   description: String
-  url: String
+  html: String
 }
 
 input PostUpdateWithWhereUniqueWithoutUserInput {
@@ -266,6 +314,35 @@ input PostWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  user: UserWhereInput
+  slug: String
+  slug_not: String
+  slug_in: [String!]
+  slug_not_in: [String!]
+  slug_lt: String
+  slug_lte: String
+  slug_gt: String
+  slug_gte: String
+  slug_contains: String
+  slug_not_contains: String
+  slug_starts_with: String
+  slug_not_starts_with: String
+  slug_ends_with: String
+  slug_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -280,21 +357,20 @@ input PostWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  user: UserWhereInput
+  html: String
+  html_not: String
+  html_in: [String!]
+  html_not_in: [String!]
+  html_lt: String
+  html_lte: String
+  html_gt: String
+  html_gte: String
+  html_contains: String
+  html_not_contains: String
+  html_starts_with: String
+  html_not_starts_with: String
+  html_ends_with: String
+  html_not_ends_with: String
   updatedAt: DateTime
   updatedAt_not: DateTime
   updatedAt_in: [DateTime!]
@@ -318,6 +394,7 @@ input PostWhereInput {
 
 input PostWhereUniqueInput {
   id: ID
+  slug: String
 }
 
 type Profile {
